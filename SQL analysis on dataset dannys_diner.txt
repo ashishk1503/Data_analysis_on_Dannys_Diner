@@ -12,7 +12,7 @@ select customer_id, count(distinct(order_date)) as no_of_days_visited_by_the_cus
 from dannys_diner.sales
 group by customer_id;
 
-4) What is the most purchased item on the menu and how many times was it purchased by all customers?
+3) What is the most purchased item on the menu and how many times was it purchased by all customers?
 
 select count(dannys_diner.sales.product_id) as count_of_most_purchased_products, dannys_diner.menu.product_name
 from dannys_diner.sales
@@ -22,7 +22,7 @@ group by dannys_diner.menu.product_name
 order by count_of_most_purchased_products desc
 limit 1;
 
-5) What are the purchased items by all customers?
+4) What are the purchased items by all customers?
 
 select count(dannys_diner.sales.product_id) as count_of_purchased_products, dannys_diner.menu.product_name
 from dannys_diner.sales
@@ -31,7 +31,7 @@ on dannys_diner.sales.product_id= dannys_diner.menu.product_id
 group by dannys_diner.menu.product_name
 order by count_of_purchased_products;
 
-6) Which item was the most popular for each customer?
+5) Which item was the most popular for each customer?
 
 select dannys_diner.sales.customer_id, dannys_diner.menu.product_name, count(dannys_diner.menu.product_name) as product_count_purchased
 from dannys_diner.sales
@@ -39,7 +39,7 @@ join dannys_diner.menu
 on dannys_diner.sales.product_id= dannys_diner.menu.product_id
 group by dannys_diner.menu.product_name, dannys_diner.sales.customer_id;
 
-7) Which item was purchased first by the customer after they became a member?
+6) Which item was purchased first by the customer after they became a member?
 
 select dannys_diner.members.customer_id, dannys_diner.members.join_date, dannys_diner.sales.order_date, dannys_diner.menu.product_name
 from dannys_diner.sales 
@@ -50,7 +50,7 @@ on dannys_diner.menu.product_id = dannys_diner.sales.product_id
 where dannys_diner.sales.order_date > dannys_diner.members.join_date
 group by dannys_diner.members.customer_id;
 
-8) Which item was purchased just before the customer became a member?
+7) Which item was purchased just before the customer became a member?
 
 select dannys_diner.members.customer_id, dannys_diner.members.join_date, dannys_diner.sales.order_date, dannys_diner.menu.product_name
 from dannys_diner.sales 
@@ -61,7 +61,7 @@ on dannys_diner.menu.product_id = dannys_diner.sales.product_id
 where dannys_diner.sales.order_date < dannys_diner.members.join_date
 group by dannys_diner.members.customer_id;
 
-9) What is the total items and amount spent for each member before they became a member?
+8) What is the total items and amount spent for each member before they became a member?
 
 select dannys_diner.members.customer_id, count(dannys_diner.menu.product_id) as total_products, sum(dannys_diner.menu.price) as total_price
 from dannys_diner.sales 
